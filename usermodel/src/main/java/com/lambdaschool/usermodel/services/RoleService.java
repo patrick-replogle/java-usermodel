@@ -46,6 +46,9 @@ public interface RoleService
      */
     Role findByName(String name);
 
+    /**
+     * Deletes all record and their associated records from the database
+     */
     public void deleteAll();
 
     /**

@@ -18,7 +18,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "roles")
-public class Role extends Auditable
+public class Role
+        extends Auditable
 {
     /**
      * The primary key (long) of the roles table.
@@ -31,7 +32,7 @@ public class Role extends Auditable
      * The name (String) of the role. Cannot be null and must be unique.
      */
     @Column(nullable = false,
-        unique = true)
+            unique = true)
     private String name;
 
 
@@ -40,7 +41,8 @@ public class Role extends Auditable
      * connects roles to the user role combination
      */
     @OneToMany(mappedBy = "role",
-        cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties(value = "role", allowSetters = true)
     private Set<UserRoles> users = new HashSet<>();
 

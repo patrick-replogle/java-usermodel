@@ -231,9 +231,6 @@ Status OK
     "path": "/useremails/useremail/8"
 }
 ```
-
-</details>
-
 </details>
 
 <details>
@@ -596,7 +593,21 @@ Location Header: http://localhost:2019/roles/role/16
 </details>
 
 <details>
-<summary>DELETE, PUT, PATCH Roles must wait</summary>
+<summary>PUT http://localhost:2019/roles/role/16</summary>
+
+DATA
+
+```JSON
+{
+    "name" : "ANewRole"
+}
+```
+
+OUTPUT
+
+```TEXT
+Status OK
+```
 
 </details>
 
@@ -879,8 +890,15 @@ DATA
         }
         ],
     "roles": [
-        {
-           "roleid": 3
+        {  
+            "role": {
+                "roleid": 3
+            }
+        },
+        {  
+            "role": {
+                "roleid": 1
+            }
         }
     ]
 }
@@ -898,6 +916,38 @@ Status OK
 
 <details>
 <summary>http://localhost:2019/users/user/name/stumps</summary>
+
+```JSON
+{
+    "userid": 16,
+    "username": "stumps",
+    "primaryemail": "stumps@lambdaschool.local",
+    "useremails": [
+        {
+            "useremailid": 19,
+            "useremail": "stumps@mymail.local"
+        },
+        {
+            "useremailid": 20,
+            "useremail": "stumps@email.local"
+        }
+    ],
+    "roles": [
+        {
+            "role": {
+                "roleid": 1,
+                "name": "ADMIN"
+            }
+        },
+        {
+            "role": {
+                "roleid": 3,
+                "name": "DATA"
+            }
+        }
+    ]
+}
+```
 
 </details>
 
@@ -939,7 +989,44 @@ Status OK
 
 </details>
 
+```JSON
+{
+    "userid": 7,
+    "username": "cinabun",
+    "primaryemail": "cinabun@lambdaschool.home",
+    "useremails": [
+        {
+            "useremailid": 21,
+            "useremail": "cinnamon@mymail.home"
+        },
+        {
+            "useremailid": 22,
+            "useremail": "hops@mymail.home"
+        },
+        {
+            "useremailid": 23,
+            "useremail": "bunny@email.home"
+        }
+    ],
+    "roles": [
+        {
+            "role": {
+                "roleid": 2,
+                "name": "USER"
+            }
+        },
+        {
+            "role": {
+                "roleid": 3,
+                "name": "DATA"
+            }
+        }
+    ]
+}
+```
+
 <details>
+
 <summary>DELETE http://localhost:2019/users/user/14</summary>
 
 ```TEXT
@@ -952,5 +1039,16 @@ Status OK
 
 <details>
 <summary>http://localhost:2019/users/user/14</summary>
+
+```JSON
+{
+    "timestamp": "2020-07-23T03:40:24.533+0000",
+    "status": 500,
+    "error": "Internal Server Error",
+    "message": "User id 14 not found!",
+    "trace": "javax.persistence.EntityNotFoundException: User id 14 not found!\n\tat com.lambdaschool.usermodel.services.UserServiceImpl.lambda$findUserById$0(UserServiceImpl.java:40)\n\tat java.base/java.util.Optional.orElseThrow(Optional.java:401)\n\tat com.lambdaschool.usermodel.services.UserServiceImpl.findUserById(UserServiceImpl.java:40)\n\tat com.lambdaschool.usermodel.services.UserServiceImpl$$FastClassBySpringCGLIB$$3cdcb410.invoke(<generated>)\n\tat org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)\n\tat org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)\n\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)\n\tat org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)\n\tat org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:367)\n\tat org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:118)\n\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)\n\tat org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)\n\tat org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)\n\tat com.lambdaschool.usermodel.services.UserServiceImpl$$EnhancerBySpringCGLIB$$adbe5f8.findUserById(<generated>)\n\tat com.lambdaschool.usermodel.controllers.UserController.getUserById(UserController.java:68)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:564)\n\tat org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)\n\tat org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)\n\tat org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)\n\tat org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)\n\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)\n\tat org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:634)\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:741)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)\n\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat java.base/java.lang.Thread.run(Thread.java:832)\n",
+    "path": "/users/user/14"
+}
+```
 
 </details>

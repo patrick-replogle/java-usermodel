@@ -33,7 +33,6 @@ public class UserServiceImpl
     @Autowired
     private RoleService roleService;
 
-
     public User findUserById(long id) throws
             EntityNotFoundException
     {
@@ -106,7 +105,6 @@ public class UserServiceImpl
         {
             Role addRole = roleService.findRoleById(ur.getRole()
                                                             .getRoleid());
-
             newUser.getRoles()
                     .add(new UserRoles(newUser, addRole));
         }

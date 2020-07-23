@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * The entity allowing interaction with the userroles table.
@@ -22,6 +22,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "userroles")
+@IdClass(UserRolesId.class)
 public class UserRoles
         extends Auditable
         implements Serializable
@@ -60,8 +61,8 @@ public class UserRoles
      * @param role The role object of this relationship
      */
     public UserRoles(
-        User user,
-        Role role)
+            User user,
+            Role role)
     {
         this.user = user;
         this.role = role;
@@ -120,7 +121,7 @@ public class UserRoles
         }
         UserRoles that = (UserRoles) o;
         return ((user == null) ? 0 : user.getUserid()) == ((that.user == null) ? 0 : that.user.getUserid()) &&
-               ((role == null) ? 0 : role.getRoleid()) == ((that.role == null) ? 0 : that.role.getRoleid());
+                ((role == null) ? 0 : role.getRoleid()) == ((that.role == null) ? 0 : that.role.getRoleid());
     }
 
     @Override

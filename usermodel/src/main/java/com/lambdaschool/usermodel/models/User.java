@@ -22,7 +22,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "users")
-public class User extends Auditable
+public class User
+        extends Auditable
 {
     /**
      * The primary key (long) of the users table.
@@ -35,7 +36,7 @@ public class User extends Auditable
      * The username (String). Cannot be null and must be unique
      */
     @Column(nullable = false,
-        unique = true)
+            unique = true)
     private String username;
 
     /**
@@ -49,7 +50,7 @@ public class User extends Auditable
      * Primary email account of user. Could be used as the userid. Cannot be null and must be unique.
      */
     @Column(nullable = false,
-        unique = true)
+            unique = true)
     @Email
     private String primaryemail;
 
@@ -57,8 +58,8 @@ public class User extends Auditable
      * A list of emails for this user
      */
     @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Useremail> useremails = new ArrayList<>();
 
@@ -67,7 +68,8 @@ public class User extends Auditable
      * connects users to the user role combination
      */
     @OneToMany(mappedBy = "user",
-        cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
@@ -88,9 +90,9 @@ public class User extends Auditable
      * @param primaryemail The primary email (String) of the user
      */
     public User(
-        String username,
-        String password,
-        String primaryemail)
+            String username,
+            String password,
+            String primaryemail)
     {
         setUsername(username);
         setPassword(password);
