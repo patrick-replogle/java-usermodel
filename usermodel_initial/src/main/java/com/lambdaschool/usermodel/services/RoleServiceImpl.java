@@ -32,6 +32,9 @@ public class RoleServiceImpl
     @Autowired
     UserRepository userrepos;
 
+    @Autowired
+    UserAuditing userAuditing;
+
     @Override
     public List<Role> findAll()
     {
@@ -86,5 +89,25 @@ public class RoleServiceImpl
     public void deleteAll()
     {
         rolerepos.deleteAll();
+    }
+
+    @Transactional
+    @Override
+    public Role update(long id, Role role)
+    {
+        if (role.getName() == null)
+        {
+            throw new EntityNotFoundException("No role name found to update!");
+        }
+
+        if (role.getUsers().size() > 0)
+        {
+            throw new EntityExistsException("User Roles are not updated thru this method");
+        }
+
+        Role newRole = findRoleById(id);
+
+        rolerepos.updateRoleName(id, role.getName(), userAuditing.getCurrentAuditor().get());
+        return findRoleById(id);
     }
 }
